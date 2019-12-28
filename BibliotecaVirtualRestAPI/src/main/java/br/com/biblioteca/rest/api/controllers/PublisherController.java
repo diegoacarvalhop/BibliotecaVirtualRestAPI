@@ -14,43 +14,43 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.biblioteca.rest.api.dtos.StatusDTO;
-import br.com.biblioteca.rest.api.models.Status;
-import br.com.biblioteca.rest.api.services.StatusService;
+import br.com.biblioteca.rest.api.dtos.PublisherDTO;
+import br.com.biblioteca.rest.api.models.Publisher;
+import br.com.biblioteca.rest.api.services.PublisherService;
 
 @RestController
-@RequestMapping(value = "/biblioteca/status")
-public class StatusController {
+@RequestMapping(value = "/biblioteca/editora")
+public class PublisherController {
 
-	private static final Logger logger = LogManager.getLogger(StatusController.class);
+	private static final Logger logger = LogManager.getLogger(PublisherController.class);
 
 	@Autowired
-	private StatusService service;
+	private PublisherService service;
 
 	@PostMapping("/create")
-	public StatusDTO salvar(@RequestBody Status status) {
-		logger.info("Salvando Status " + status.getDescription());
-		return service.salvar(status);
+	public PublisherDTO salvar(@RequestBody Publisher publisher) {
+		logger.info("Salvando Editora " + publisher.getDescription());
+		return service.salvar(publisher);
 	}
 
 	@GetMapping("/listAll")
-	public List<StatusDTO> listarTodos() {
-		List<StatusDTO> dtos = service.listarTodos();
+	public List<PublisherDTO> listarTodos() {
+		List<PublisherDTO> dtos = service.listarTodos();
 		return dtos;
 	}
 
 	@GetMapping("/{id}")
-	public StatusDTO listarPorId(@PathVariable(value = "id") long id) {
+	public PublisherDTO listarPorId(@PathVariable(value = "id") long id) {
 		return service.listarPorId(id);
 	}
 
 	@PutMapping("/edit/{id}")
-	public StatusDTO editar(@PathVariable(value = "id") long id, @RequestBody Status status) {
-		return service.editar(id, status);
+	public PublisherDTO editar(@PathVariable(value = "id") long id, @RequestBody Publisher publisher) {
+		return service.editar(id, publisher);
 	}
 
 	@DeleteMapping("/delete/{id}")
-	public StatusDTO deletar(@PathVariable(value = "id") long id) {
+	public PublisherDTO deletar(@PathVariable(value = "id") long id) {
 		return service.deletar(id);
 	}
 

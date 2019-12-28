@@ -26,6 +26,7 @@ public class StatusService {
 		String validacao = validarStatus(status);
 		if (validacao.equals(ValidacaoEnum.OK.getDescricao())) {
 			status.setNemotechnic(status.getNemotechnic().toUpperCase());
+			status.setIsActive(ValidacaoEnum.SIM.getDescricao());
 			return validarStatusExistente(status);
 		} else {
 			return montarDTOErro(status, validacao);
@@ -58,6 +59,7 @@ public class StatusService {
 			if (validarStatus(status) == ValidacaoEnum.OK.getDescricao()) {
 				statusEditar.setDescription(status.getDescription());
 				statusEditar.setNemotechnic(status.getNemotechnic().toUpperCase());
+				statusEditar.setIsActive(status.getIsActive());
 				return montarDTOSucesso(repository.save(statusEditar), true, ValidacaoEnum.EDITAR.getDescricao());
 			} else {
 				return montarDTOErro(null, validarStatus(status));
@@ -81,6 +83,7 @@ public class StatusService {
 			dto.setId(status.getId());
 			dto.setDescription(status.getDescription());
 			dto.setNemotechnic(status.getNemotechnic());
+			dto.setIsActive(status.getIsActive());
 			dto.setRegistration_date(status.getRegistration_date());
 			if (preencheMsgSucesso && validacao.equals(ValidacaoEnum.SALVAR.getDescricao())) {
 				dto.setMsgSuccess("Status " + status.getDescription() + " cadastrado com sucesso.");

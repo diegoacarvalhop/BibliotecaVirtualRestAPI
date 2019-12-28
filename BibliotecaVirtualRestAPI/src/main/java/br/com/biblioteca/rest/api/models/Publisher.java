@@ -5,9 +5,13 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -18,8 +22,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "STATUS")
-public class Status implements Serializable {
+@Table(name = "PUBLISHER")
+public class Publisher implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -30,13 +34,14 @@ public class Status implements Serializable {
 	@Column(nullable = false)
 	private String description;
 
-	@Column(nullable = false, unique = true)
-	private String nemotechnic;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "status_id", nullable = false, foreignKey = @ForeignKey(name = "fk_status"))
+	private Status status;
 
-	@Column(name = "is_active", nullable = false, length = 1)
-	private String isActive;
+	private String contact;
 
 	@CreationTimestamp
 	@Column(name = "registration_date")
 	private Date registration_date;
+
 }
