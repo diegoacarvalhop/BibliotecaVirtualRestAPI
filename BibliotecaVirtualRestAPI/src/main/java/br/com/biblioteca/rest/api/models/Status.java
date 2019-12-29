@@ -38,5 +38,5 @@ public class Status implements Serializable {
 
 	@CreationTimestamp
 	@Column(name = "registration_date")
-	private Date registration_date;
+	private Date registrationDate;
 }

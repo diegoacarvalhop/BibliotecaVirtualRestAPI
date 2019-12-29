@@ -13,7 +13,7 @@ public class StatusDTO {
 	private String description;
 	private String nemotechnic;
 	private String isActive;
-	private Date registration_date;
+	private Date registrationDate;
 	private String msgSuccess;
 	private String msgError;
 }

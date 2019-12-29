@@ -8,10 +8,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PublisherDTO {
+public class AuthorDTO {
 
 	private long id;
-	private String description;
+	private String name;
 	private Status status;
 	private String contact;
 	private Date registrationDate;

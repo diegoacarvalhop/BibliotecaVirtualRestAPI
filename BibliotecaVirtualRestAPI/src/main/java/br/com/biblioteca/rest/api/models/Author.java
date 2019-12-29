@@ -5,7 +5,6 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,8 +21,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "PUBLISHER")
-public class Publisher implements Serializable {
+@Table(name = "AUTHOR")
+public class Author implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -32,9 +31,9 @@ public class Publisher implements Serializable {
 	private long id;
 
 	@Column(nullable = false)
-	private String description;
+	private String name;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name = "status_id", nullable = false, foreignKey = @ForeignKey(name = "fk_status"))
 	private Status status;
 

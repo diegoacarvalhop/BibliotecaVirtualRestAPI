@@ -11,8 +11,10 @@ import org.springframework.stereotype.Service;
 import br.com.biblioteca.rest.api.controllers.StatusController;
 import br.com.biblioteca.rest.api.dtos.StatusDTO;
 import br.com.biblioteca.rest.api.enuns.ValidacaoEnum;
+import br.com.biblioteca.rest.api.models.Author;
 import br.com.biblioteca.rest.api.models.Publisher;
 import br.com.biblioteca.rest.api.models.Status;
+import br.com.biblioteca.rest.api.repositories.AuthorRepository;
 import br.com.biblioteca.rest.api.repositories.PublisherRepository;
 import br.com.biblioteca.rest.api.repositories.StatusRepository;
 
@@ -23,12 +25,15 @@ public class StatusService {
 
 	private StatusRepository repository;
 	private PublisherRepository repositoryPublisher;
+	private AuthorRepository repositoryAuthor;
 
 	@Autowired
-	public StatusService(StatusRepository repository, PublisherRepository repositoryPublisher) {
+	public StatusService(StatusRepository repository, PublisherRepository repositoryPublisher,
+			AuthorRepository repositoryAuthor) {
 		super();
 		this.repository = repository;
 		this.repositoryPublisher = repositoryPublisher;
+		this.repositoryAuthor = repositoryAuthor;
 	}
 
 	public StatusDTO salvar(Status status) {
@@ -102,7 +107,7 @@ public class StatusService {
 			dto.setDescription(status.getDescription());
 			dto.setNemotechnic(status.getNemotechnic());
 			dto.setIsActive(status.getIsActive());
-			dto.setRegistration_date(status.getRegistration_date());
+			dto.setRegistrationDate(status.getRegistrationDate());
 			if (preencheMsgSucesso && validacao.equals(ValidacaoEnum.SALVAR.getDescricao())) {
 				dto.setMsgSuccess("Status " + status.getDescription() + " cadastrado com sucesso.");
 			} else if (preencheMsgSucesso && validacao.equals(ValidacaoEnum.EDITAR.getDescricao())) {
@@ -170,7 +175,8 @@ public class StatusService {
 	public boolean validarDeletar(Status status) {
 		logger.info("Validando se o Status " + status.getDescription() + " está sendo usado.");
 		List<Publisher> publishers = repositoryPublisher.findByStatus(status);
-		if (publishers.size() != 0) {
+		List<Author> authors = repositoryAuthor.findByStatus(status);
+		if (publishers.size() != 0 || authors.size() != 0) {
 			return false;
 		} else {
 			return true;

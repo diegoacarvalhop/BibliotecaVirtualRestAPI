@@ -82,7 +82,7 @@ public class PublisherService {
 			dto.setDescription(publisher.getDescription());
 			dto.setStatus(publisher.getStatus());
 			dto.setContact(publisher.getContact());
-			dto.setRegistration_date(publisher.getRegistration_date());
+			dto.setRegistrationDate(publisher.getRegistrationDate());
 			if (preencheMsgSucesso && validacao.equals(ValidacaoEnum.SALVAR.getDescricao())) {
 				dto.setMsgSuccess("Editora " + publisher.getDescription() + " cadastrada com sucesso.");
 			} else if (preencheMsgSucesso && validacao.equals(ValidacaoEnum.EDITAR.getDescricao())) {
