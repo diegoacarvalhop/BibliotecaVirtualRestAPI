@@ -6,7 +6,7 @@ import lombok.Getter;
 public enum ValidacaoEnum {
 
 	EXISTE("existe"), NAO_EXISTE("naoExiste"), NULL("nulo"), BRANCO("branco"), OK("ok"), SALVAR("salvar"),
-	EDITAR("editar"), DELETAR("deletar"), SIM("S"), NAO("N");
+	EDITAR("editar"), DELETAR("deletar"), SIM("S"), NAO("N"), FK("foreignKey");
 
 	private String descricao;
 
