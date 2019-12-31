@@ -12,40 +12,40 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.biblioteca.rest.api.dtos.AuthorDTO;
-import br.com.biblioteca.rest.api.models.Author;
-import br.com.biblioteca.rest.api.services.AuthorService;
+import br.com.biblioteca.rest.api.dtos.BookDTO;
+import br.com.biblioteca.rest.api.models.Book;
+import br.com.biblioteca.rest.api.services.BookService;
 
 @RestController
-@RequestMapping(value = "/biblioteca/autor")
-public class AuthorController {
+@RequestMapping(value = "/biblioteca/livro")
+public class BookController {
 
 	@Autowired
-	private AuthorService service;
+	private BookService service;
 
 	@PostMapping("/create")
-	public AuthorDTO salvar(@RequestBody Author author) {
-		return service.salvar(author);
+	public BookDTO salvar(@RequestBody Book book) {
+		return service.salvar(book);
 	}
 
 	@GetMapping("/listAll")
-	public List<AuthorDTO> listarTodos() {
-		List<AuthorDTO> dtos = service.listarTodos();
+	public List<BookDTO> listarTodos() {
+		List<BookDTO> dtos = service.listarTodos();
 		return dtos;
 	}
 
 	@GetMapping("/{id}")
-	public AuthorDTO listarPorId(@PathVariable(value = "id") long id) {
+	public BookDTO listarPorId(@PathVariable(value = "id") long id) {
 		return service.listarPorId(id);
 	}
 
 	@PutMapping("/edit/{id}")
-	public AuthorDTO editar(@PathVariable(value = "id") long id, @RequestBody Author author) {
-		return service.editar(id, author);
+	public BookDTO editar(@PathVariable(value = "id") long id, @RequestBody Book book) {
+		return service.editar(id, book);
 	}
 
 	@DeleteMapping("/delete/{id}")
-	public AuthorDTO deletar(@PathVariable(value = "id") long id) {
+	public BookDTO deletar(@PathVariable(value = "id") long id) {
 		return service.deletar(id);
 	}
 
